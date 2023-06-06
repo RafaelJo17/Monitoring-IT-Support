@@ -1,0 +1,30 @@
+$.ajax({
+            type : 'POST',
+            url : "{{ url_for ('ins_DataPersonnel') }}",
+            data : {
+              'kode_cabang' : v_cabang,
+              'grade' : v_gr,
+              'nim' : v_nim,
+              'nama' : v_name,
+              'title' : v_title,
+              'telp' : v_Telp
+            },
+            success : function(data){
+              if(data['status'] == 'F'){
+                  messageAlert('W', 'Simpan Data Gagal.');
+              } else if (data['status'] == 'W'){
+                  messageAlert('W', data['message']);
+              } else {
+                  messageAlert('S', 'Data Berhasil Di Simpan.');
+                  getPersonnelBranch();
+                  $('#employeeGR').val('');
+                  $('#employeeID').val('');
+                  $('#employeeName').val('');
+                  $('#employeeTitle').val('');
+                  $('#employeeCUG').val('');
+              }
+            },
+            error : function(){
+              messageAlert('W', '500! Internal Server Error.');
+            }
+}); 
