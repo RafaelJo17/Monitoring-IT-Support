@@ -1,0 +1,23 @@
+def getDataBranch(p_nim):
+    connectionDb = CreateConnection()
+    if connectionDb.error:
+        return connectionDb.responError
+    customQuery = QueryDb(connectionDb)
+
+    query = ''' 
+            select 
+                perusahaan_id, kd_toko, nama_cabang 
+            from 
+                its_orang_uu 
+            left join 
+                its_toko it2 on kd_toko = kode_cabang 
+            where 
+                nim = %(v_nim)s
+            group by 
+                kd_toko, nama_toko
+            order by 
+                perusahaan_id, kd_toko
+    '''
+    kondisi = {'v_nim' : p_nim}
+    del connectionDb
+    return customQuery.select(query, kondisi)
