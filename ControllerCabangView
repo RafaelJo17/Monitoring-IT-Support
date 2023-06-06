@@ -1,0 +1,7 @@
+def MasterCabangStructureView():
+
+data = {
+        'data_branch' : getDataCabang(current_user.nim),
+        'data_count_toko' : getCountToko(current_user.code_cabang)
+    }
+return render_template('departement/Store/masterCabangStructureView.html', title = 'Master Cabang Personnel', data=data)
