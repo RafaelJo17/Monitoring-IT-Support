@@ -1,0 +1,5 @@
+<select id="employeeCabang" name="employeeCabang" class="form-control">
+    {% for dt in data['data_branch']['result'] %}
+       <option value="{{dt.kd_toko}}" {% if dt.kd_toko == current_user.kode_toko %} selected {% endif %}>{{dt.kd_toko}}</option>
+    {% endfor %}
+</select>
